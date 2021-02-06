@@ -8,6 +8,16 @@ export default class TodosList extends Component {
         this.state = {todos: []};
     }
 
+    componentDidMount() {
+        axios.get('http://localhost:4000/todos/')
+            .then(response => {
+                this.setState({ todos: response.data });
+            })
+            .catch(function (error){
+                console.log(error);
+            })
+    }
+
     render() {
         return (
             <div>
