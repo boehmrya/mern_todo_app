@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 export default class EditTodo extends Component {
-  constructor(props) {
+
+    constructor(props) {
         super(props);
 
         this.onChangeTodoDescription = this.onChangeTodoDescription.bind(this);
