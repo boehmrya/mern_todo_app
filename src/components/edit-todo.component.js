@@ -52,6 +52,21 @@ export default class EditTodo extends Component {
         });
     }
 
+    onSubmit(e) {
+        e.preventDefault();
+        const obj = {
+            todo_description: this.state.todo_description,
+            todo_responsible: this.state.todo_responsible,
+            todo_priority: this.state.todo_priority,
+            todo_completed: this.state.todo_completed
+        };
+        console.log(obj);
+        axios.post('http://localhost:4000/todos/update/'+this.props.match.params.id, obj)
+            .then(res => console.log(res.data));
+
+        this.props.history.push('/');
+    }
+
     render() {
         return (
             <div>
