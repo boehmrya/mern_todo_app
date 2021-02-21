@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 
 export default class EditTodo extends Component {
@@ -72,10 +73,16 @@ export default class EditTodo extends Component {
         axios.post('http://localhost:4000/todos/update/'+this.props.match.params.id, obj)
             .then(res => console.log(res.data));
 
-        this.props.history.push('/');
+        this.setState({
+            toDashboard: true
+        });
     }
 
     render() {
+        if (this.state.toDashboard === true) {
+          return <Redirect to='/' />
+        }
+
         return (
             <div>
                 <h3 align="center">Update Todo</h3>
