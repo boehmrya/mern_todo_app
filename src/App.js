@@ -7,6 +7,15 @@ import EditTodo from "./components/edit-todo.component";
 import TodosList from "./components/todos-list.component";
 
 class App extends Component {
+  constructor(props) {
+      super(props);
+      this.state = {todos: []};
+  }
+
+  updateTodos(newTodos) {
+    this.setState({ todos: newTodos });
+  }
+
   render() {
     return (
       <Router>
