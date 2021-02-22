@@ -12,7 +12,23 @@ class App extends Component {
       this.state = {todos: []};
   }
 
-  updateTodos(newTodos) {
+  updateAllTodos(newTodos) {
+    this.setState({ todos: newTodos });
+  }
+
+  updateSingleTodo(newTodo) {
+    let newTodos = [];
+    const todos = this.state.todos;
+    const todosLen = todos.length;
+    for (var i = 0; i < todosLen; i++) {
+      if (newTodo._id === todos[i]._id) {
+        newTodos.push(newTodo);
+      }
+      else {
+        newTodos.push(todos[i]);
+      }
+    }
+
     this.setState({ todos: newTodos });
   }
 
