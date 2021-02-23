@@ -32,6 +32,10 @@ class App extends Component {
     this.setState({ todos: newTodos });
   }
 
+  addTodo(newTodo) {
+    this.setState({ todos: this.state.todos.concat([newTodo]) });
+  }
+
   render() {
     return (
       <Router>
@@ -56,8 +60,18 @@ class App extends Component {
               todos={this.state.todos}
             />
           )} />
-          <Route path="/edit/:id" component={EditTodo} />
-          <Route path="/create" component={CreateTodo} />
+          <Route path="/edit/:id" render={() => (
+            <EditTodo
+              updateTodo={this.updateSingleTodo}
+              todos={this.state.todos}
+            />
+          )} />
+          <Route path="/create" render={() => (
+            <CreateTodo
+              addTodo={this.addTodo}
+              todos={this.state.todos}
+            />
+          )} />
         </div>
       </Router>
     );
