@@ -11,9 +11,7 @@ export default class EditTodo extends Component {
         this.onChangeTodoResponsible = this.onChangeTodoResponsible.bind(this);
         this.onChangeTodoPriority = this.onChangeTodoPriority.bind(this);
         this.onChangeTodoCompleted = this.onChangeTodoCompleted.bind(this);
-        //this.onSubmit = this.onSubmit.bind(this);
-        this.onSubmit = this.submitWrap.bind(this);
-
+        this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
             todo_description: '',
@@ -94,7 +92,7 @@ export default class EditTodo extends Component {
         return (
             <div>
                 <h3 align="center">Update Todo</h3>
-                <form onSubmit={this.submitWrap}>
+                <form onSubmit={this.props.updateTodo(this.state, this.props.todos)}>
                     <div className="form-group">
                         <label>Description: </label>
                         <input  type="text"
