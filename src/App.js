@@ -16,9 +16,15 @@ class App extends Component {
     this.setState({ todos: newTodos });
   }
 
-  updateSingleTodo(newTodo) {
+  updateSingleTodo(state, todos) {
+    // set up new todo
+    const newTodo = {
+      todo_description: state.todo_description,
+      todo_responsible: state.todo_responsible,
+      todo_priority: state.todo_priority,
+      todo_completed: state.todo_completed
+    }
     let newTodos = [];
-    const todos = this.state.todos;
     const todosLen = todos.length;
     for (var i = 0; i < todosLen; i++) {
       if (newTodo._id === todos[i]._id) {

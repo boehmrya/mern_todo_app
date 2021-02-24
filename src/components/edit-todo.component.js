@@ -11,7 +11,9 @@ export default class EditTodo extends Component {
         this.onChangeTodoResponsible = this.onChangeTodoResponsible.bind(this);
         this.onChangeTodoPriority = this.onChangeTodoPriority.bind(this);
         this.onChangeTodoCompleted = this.onChangeTodoCompleted.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
+        //this.onSubmit = this.onSubmit.bind(this);
+        this.onSubmit = this.submitWrap.bind(this);
+
 
         this.state = {
             todo_description: '',
@@ -23,7 +25,6 @@ export default class EditTodo extends Component {
     }
 
     componentDidMount() {
-      console.log(this.props.params);
         axios.get('http://localhost:4000/todos/'+this.props.match.params.id)
             .then(response => {
                 this.setState({
@@ -70,13 +71,19 @@ export default class EditTodo extends Component {
             todo_priority: this.state.todo_priority,
             todo_completed: this.state.todo_completed
         };
-        console.log(obj);
         axios.post('http://localhost:4000/todos/update/'+this.props.match.params.id, obj)
             .then(res => console.log(res.data));
+    }
 
-        this.setState({
-            toDashboard: true
-        });
+    submitWrap() {
+      this.onSubmit();
+      this.props.updateTodo(this.state, this.props.todos);
+
+      /*
+      this.setState({
+          toDashboard: true
+      });
+      */
     }
 
     render() {
@@ -87,7 +94,7 @@ export default class EditTodo extends Component {
         return (
             <div>
                 <h3 align="center">Update Todo</h3>
-                <form onSubmit={this.onSubmit}>
+                <form onSubmit={this.submitWrap}>
                     <div className="form-group">
                         <label>Description: </label>
                         <input  type="text"
