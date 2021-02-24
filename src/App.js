@@ -54,20 +54,23 @@ class App extends Component {
             </div>
           </nav>
           <br/>
-          <Route exact path='/' render={() => (
+          <Route exact path='/' render={(props) => (
             <TodosList
+              {...props}
               updateTodos={this.updateAllTodos}
               todos={this.state.todos}
             />
           )} />
-          <Route path="/edit/:id" render={() => (
+          <Route path="/edit/:id" render={(props) => (
             <EditTodo
+              {...props}
               updateTodo={this.updateSingleTodo}
               todos={this.state.todos}
             />
           )} />
-          <Route path="/create" render={() => (
+          <Route path="/create" render={(props) => (
             <CreateTodo
+              {...props}
               addTodo={this.addTodo}
               todos={this.state.todos}
             />
