@@ -71,17 +71,12 @@ export default class EditTodo extends Component {
         };
         axios.post('http://localhost:4000/todos/update/'+this.props.match.params.id, obj)
             .then(res => console.log(res.data));
-    }
 
-    submitWrap() {
-      this.onSubmit();
-      this.props.updateTodo(this.state, this.props.todos);
+        this.props.updateTodo(this.state, this.props.todos);
 
-      /*
-      this.setState({
-          toDashboard: true
-      });
-      */
+        this.setState({
+            toDashboard: true
+        });
     }
 
     render() {
@@ -92,7 +87,7 @@ export default class EditTodo extends Component {
         return (
             <div>
                 <h3 align="center">Update Todo</h3>
-                <form onSubmit={this.props.updateTodo(this.state, this.props.todos)}>
+                <form onSubmit={this.onSubmit}>
                     <div className="form-group">
                         <label>Description: </label>
                         <input  type="text"

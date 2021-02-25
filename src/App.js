@@ -9,6 +9,11 @@ import TodosList from "./components/todos-list.component";
 class App extends Component {
   constructor(props) {
       super(props);
+
+      this.updateAllTodos = this.updateAllTodos.bind(this);
+      this.updateSingleTodo = this.updateSingleTodo.bind(this);
+      this.addTodo = this.addTodo.bind(this);
+
       this.state = {todos: []};
   }
 
