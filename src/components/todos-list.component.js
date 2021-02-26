@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 const Todo = props => (
-    <tr>
+    <tr>{console.log(props.todo.todo_priority)}
         <td>{props.todo.todo_description}</td>
         <td>{props.todo.todo_responsible}</td>
         <td>{props.todo.todo_priority}</td>
@@ -17,13 +17,12 @@ export default class TodosList extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {todos: []};
     }
 
     componentDidMount() {
         axios.get('http://localhost:4000/todos/')
             .then(response => {
-                this.setState({ todos: response.data });
+                this.props.updateTodos(response.data);
             })
             .catch(function (error){
                 console.log(error);
@@ -31,7 +30,7 @@ export default class TodosList extends Component {
     }
 
     todoList() {
-        return this.state.todos.map(function(currentTodo, i){
+        return this.props.todos.map(function(currentTodo, i){
             return <Todo todo={currentTodo} key={i} />;
         })
     }
