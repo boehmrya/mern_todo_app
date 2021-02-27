@@ -10,7 +10,8 @@ export default class CreateTodo extends Component {
             todo_description: '',
             todo_responsible: '',
             todo_priority: '',
-            todo_completed: false
+            todo_completed: false,
+            toDashboard: false
         }
 
         this.onChangeTodoDescription = this.onChangeTodoDescription.bind(this);
@@ -40,11 +41,6 @@ export default class CreateTodo extends Component {
     onSubmit(e) {
         e.preventDefault();
 
-        console.log(`Form submitted:`);
-        console.log(`Todo Description: ${this.state.todo_description}`);
-        console.log(`Todo Responsible: ${this.state.todo_responsible}`);
-        console.log(`Todo Priority: ${this.state.todo_priority}`);
-
         const newTodo = {
             todo_description: this.state.todo_description,
             todo_responsible: this.state.todo_responsible,
@@ -53,14 +49,12 @@ export default class CreateTodo extends Component {
         };
 
         axios.post('http://localhost:4000/todos/add', newTodo)
-            .then(res => console.log(res.data));
-
-        this.setState({
-            todo_description: '',
-            todo_responsible: '',
-            todo_priority: '',
-            todo_completed: false
-        })
+          .then(() => {
+            this.setState({ toDashboard: true });
+          })
+          .catch(function (error){
+            console.log(error);
+          })
     }
 
     render() {
