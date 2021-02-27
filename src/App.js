@@ -69,28 +69,17 @@ class App extends Component {
             </div>
           </nav>
           <br/>
-          <Route exact path='/' render={(props) => (
-            <TodosList
-              {...props}
-              updateTodos={this.updateAllTodos}
-              todos={this.state.todos}
-            />
-          )} />
-          <Route path="/edit/:id" render={(props) => (
-            <EditTodo
-              {...props}
-              updateTodo={this.updateSingleTodo}
-              todos={this.state.todos}
-              toDashboard={this.state.toDashboard}
-            />
-          )} />
-          <Route path="/create" render={(props) => (
-            <CreateTodo
-              {...props}
-              addTodo={this.addTodo}
-              todos={this.state.todos}
-            />
-          )} />
+          <Route exact path='/'>
+            <TodosList />
+          </Route>
+
+          <Route path="/edit/:id">
+            <EditTodo />
+          </Route>
+
+          <Route path="/create">
+            <CreateTodo />
+          </Route>
         </div>
       </Router>
     );

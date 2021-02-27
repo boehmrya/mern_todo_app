@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 const Todo = props => (
     <tr>
@@ -13,19 +14,26 @@ const Todo = props => (
 )
 
 export default class TodosList extends Component {
+    constructor(props) {
+        super(props);
 
-    getTodos() {
+        this.state = {
+          todos: [],
+          fetchingData: true
+        };
+    }
+
+    componentDidMount() {
       axios.get('http://localhost:4000/todos/')
           .then(response => {
-              this.props.updateTodos(response.data);
+              this.setState({
+                todos: response.data,
+                fetchingData: false
+              });
           })
           .catch(function (error){
               console.log(error);
           })
-    }
-
-    componentDidMount() {
-
     }
 
     todoList() {
@@ -35,6 +43,8 @@ export default class TodosList extends Component {
     }
 
     render() {
+        if (this.state.fetchingData) return null;
+
         return (
             <div>
                 <h3>Todos List</h3>

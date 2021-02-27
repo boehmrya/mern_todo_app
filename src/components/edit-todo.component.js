@@ -73,6 +73,8 @@ export default class EditTodo extends Component {
             .then(res => console.log(res.data));
 
         this.props.updateTodo(this.state, this.props.todos);
+
+        this.setState({ toDashboard: true });
     }
 
     render() {
