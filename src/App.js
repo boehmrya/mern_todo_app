@@ -8,49 +8,6 @@ import EditTodo from "./components/edit-todo.component";
 import TodosList from "./components/todos-list.component";
 
 class App extends Component {
-  constructor(props) {
-      super(props);
-
-      this.updateAllTodos = this.updateAllTodos.bind(this);
-      this.updateSingleTodo = this.updateSingleTodo.bind(this);
-      this.addTodo = this.addTodo.bind(this);
-
-      this.state = { todos: [] };
-  }
-
-  updateAllTodos(newTodos) {
-    this.setState({ todos: newTodos });
-  }
-
-  updateSingleTodo(state, todos) {
-    // set up new todo
-    const newTodo = {
-      todo_description: state.todo_description,
-      todo_responsible: state.todo_responsible,
-      todo_priority: state.todo_priority,
-      todo_completed: state.todo_completed
-    }
-    let newTodos = [];
-    const todosLen = todos.length;
-    for (var i = 0; i < todosLen; i++) {
-      if (newTodo._id === todos[i]._id) {
-        newTodos.push(newTodo);
-      }
-      else {
-        newTodos.push(todos[i]);
-      }
-    }
-
-    this.setState({
-      todos: newTodos,
-      toDashboard: true
-    });
-  }
-
-  addTodo(newTodo) {
-    this.setState({ todos: this.state.todos.concat([newTodo]) });
-  }
-
   render() {
     return (
       <Router>
@@ -69,17 +26,15 @@ class App extends Component {
             </div>
           </nav>
           <br/>
-          <Route exact path='/'>
-            <TodosList />
-          </Route>
+          
+          <Route exact path='/'
+                 render={(props) => <TodosList {...props} /> } />
 
-          <Route path="/edit/:id">
-            <EditTodo />
-          </Route>
+          <Route path="/edit/:id"
+                 render={(props) => <EditTodo {...props} /> } />
 
-          <Route path="/create">
-            <CreateTodo />
-          </Route>
+          <Route path="/create"
+                 render={(props) => <CreateTodo {...props} /> } />
         </div>
       </Router>
     );

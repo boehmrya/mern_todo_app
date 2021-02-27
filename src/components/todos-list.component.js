@@ -37,7 +37,7 @@ export default class TodosList extends Component {
     }
 
     todoList() {
-        return this.props.todos.map(function(currentTodo, i){
+        return this.state.todos.map(function(currentTodo, i){
             return <Todo todo={currentTodo} key={i} />;
         })
     }

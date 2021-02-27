@@ -70,15 +70,17 @@ export default class EditTodo extends Component {
             todo_completed: this.state.todo_completed
         };
         axios.post('http://localhost:4000/todos/update/'+this.props.match.params.id, obj)
-            .then(res => console.log(res.data));
+            .then(() => {
+              this.setState({ toDashboard: true });
+            })
+            .catch(function (error){
+                console.log(error);
+            })
 
-        this.props.updateTodo(this.state, this.props.todos);
-
-        this.setState({ toDashboard: true });
     }
 
     render() {
-        if (this.props.toDashboard === true) {
+        if (this.state.toDashboard === true) {
           return <Redirect to='/' />
         }
 
