@@ -14,6 +14,20 @@ const Todo = props => (
 
 export default class TodosList extends Component {
 
+    getTodos() {
+      axios.get('http://localhost:4000/todos/')
+          .then(response => {
+              this.props.updateTodos(response.data);
+          })
+          .catch(function (error){
+              console.log(error);
+          })
+    }
+
+    componentDidMount() {
+
+    }
+
     todoList() {
         return this.props.todos.map(function(currentTodo, i){
             return <Todo todo={currentTodo} key={i} />;

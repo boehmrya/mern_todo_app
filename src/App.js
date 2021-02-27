@@ -11,23 +11,15 @@ class App extends Component {
   constructor(props) {
       super(props);
 
+      this.updateAllTodos = this.updateAllTodos.bind(this);
       this.updateSingleTodo = this.updateSingleTodo.bind(this);
       this.addTodo = this.addTodo.bind(this);
 
-      this.state = {
-        todos: [],
-        toDashboard: false
-      };
+      this.state = { todos: [] };
   }
 
-  componentDidMount() {
-    axios.get('http://localhost:4000/todos/')
-        .then(response => {
-            this.setState({ todos: response.data });
-        })
-        .catch(function (error){
-            console.log(error);
-        })
+  updateAllTodos(newTodos) {
+    this.setState({ todos: newTodos });
   }
 
   updateSingleTodo(state, todos) {
@@ -60,10 +52,6 @@ class App extends Component {
   }
 
   render() {
-    if (this.state.toDashboard === true) {
-      return <Redirect to='/' />
-    }
-
     return (
       <Router>
         <div className="container">
@@ -84,6 +72,7 @@ class App extends Component {
           <Route exact path='/' render={(props) => (
             <TodosList
               {...props}
+              updateTodos={this.updateAllTodos}
               todos={this.state.todos}
             />
           )} />
@@ -92,6 +81,7 @@ class App extends Component {
               {...props}
               updateTodo={this.updateSingleTodo}
               todos={this.state.todos}
+              toDashboard={this.state.toDashboard}
             />
           )} />
           <Route path="/create" render={(props) => (
