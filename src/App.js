@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import axios from 'axios';
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import CreateTodo from "./components/create-todo.component";
@@ -14,11 +15,22 @@ class App extends Component {
       this.updateSingleTodo = this.updateSingleTodo.bind(this);
       this.addTodo = this.addTodo.bind(this);
 
-      this.state = {todos: []};
+      this.state = {
+        todos: [],
+        updateTodos: false
+      };
   }
 
-  updateAllTodos(newTodos) {
-    this.setState({ todos: newTodos });
+  componentDidMount() {
+    axios.get('http://localhost:4000/todos/')
+        .then(response => {
+            //this.props.updateTodos(response.data);
+            this.setState({ todos: response.data });
+            console.log("parent state updated from api");
+        })
+        .catch(function (error){
+            console.log(error);
+        })
   }
 
   updateSingleTodo(state, todos) {
@@ -48,6 +60,7 @@ class App extends Component {
   }
 
   render() {
+
     return (
       <Router>
         <div className="container">
@@ -68,7 +81,7 @@ class App extends Component {
           <Route exact path='/' render={(props) => (
             <TodosList
               {...props}
-              updateTodos={this.updateAllTodos}
+              updateTodos={this.state.UpdateTodos}
               todos={this.state.todos}
             />
           )} />
