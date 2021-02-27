@@ -80,9 +80,6 @@ export default class EditTodo extends Component {
     }
 
     render() {
-        if (this.state.toDashboard === true) {
-          return <Redirect to='/' />
-        }
 
         return (
             <div>

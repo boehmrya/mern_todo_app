@@ -14,7 +14,10 @@ class App extends Component {
       this.updateSingleTodo = this.updateSingleTodo.bind(this);
       this.addTodo = this.addTodo.bind(this);
 
-      this.state = { todos: [] };
+      this.state = {
+        todos: [],
+        toDashboard: false
+      };
   }
 
   componentDidMount() {
@@ -46,7 +49,10 @@ class App extends Component {
       }
     }
 
-    this.setState({ todos: newTodos });
+    this.setState({
+      todos: newTodos,
+      toDashboard: true
+    });
   }
 
   addTodo(newTodo) {
@@ -54,6 +60,9 @@ class App extends Component {
   }
 
   render() {
+    if (this.state.toDashboard === true) {
+      return <Redirect to='/' />
+    }
 
     return (
       <Router>
