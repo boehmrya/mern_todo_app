@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import axios from 'axios';
-
 
 export default class CreateTodo extends Component {
   constructor(props) {
@@ -58,6 +58,10 @@ export default class CreateTodo extends Component {
     }
 
     render() {
+        if (this.state.toDashboard === true) {
+          return <Redirect to='/' />
+        }
+
         return (
             <div style={{marginTop: 10}}>
                 <h3>Create New Todo</h3>

@@ -74,7 +74,7 @@ export default class EditTodo extends Component {
               this.setState({ toDashboard: true });
             })
             .catch(function (error){
-                console.log(error);
+              console.log(error);
             })
     }
 
