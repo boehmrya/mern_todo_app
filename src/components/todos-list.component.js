@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 const Todo = props => (
-    <tr>{console.log(props.todo.todo_priority)}
+    <tr>
         <td>{props.todo.todo_description}</td>
         <td>{props.todo.todo_responsible}</td>
         <td>{props.todo.todo_priority}</td>
@@ -20,8 +20,11 @@ export default class TodosList extends Component {
     }
 
     componentDidMount() {
+      console.log("mounted");
+      console.log(this.props);
         axios.get('http://localhost:4000/todos/')
             .then(response => {
+              //console.log(response.data);
                 this.props.updateTodos(response.data);
             })
             .catch(function (error){
