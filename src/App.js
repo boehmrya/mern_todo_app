@@ -6,6 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import CreateTodo from "./components/create-todo.component";
 import EditTodo from "./components/edit-todo.component";
 import TodosList from "./components/todos-list.component";
+import DeleteTodo from "./components/delete-todo.component";
 
 class App extends Component {
   render() {
@@ -26,7 +27,7 @@ class App extends Component {
             </div>
           </nav>
           <br/>
-          
+
           <Route exact path='/'
                  render={(props) => <TodosList {...props} /> } />
 
@@ -35,6 +36,9 @@ class App extends Component {
 
           <Route path="/create"
                  render={(props) => <CreateTodo {...props} /> } />
+
+          <Route path="/delete/:id"
+                 render={(props) => <DeleteTodo {...props} /> } />
         </div>
       </Router>
     );

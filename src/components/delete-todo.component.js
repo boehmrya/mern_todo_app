@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 
-export default class EditTodo extends Component {
+export default class DeleteTodo extends Component {
 
     constructor(props) {
         super(props);
